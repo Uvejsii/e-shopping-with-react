@@ -10,12 +10,12 @@ const SearchBar = ({searchProduct}) => {
     }
 
     return (
-        <>
+        <div>
             <input type="text" placeholder="Search..."
                    value={searchQuery}
                    onChange={onSearch}/>
             <Search className="fs-4"/>
-        </>
+        </div>
     )
 }
 import {useState} from "react";

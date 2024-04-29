@@ -37,10 +37,20 @@ const HomePage = () => {
         setFilteredProducts(filtered);
     }
 
+    const categoryFilter = (category) => {
+        const categoryFilter = products.filter((product) => {
+            return product.category.includes(category)
+        })
+
+        setFilteredProducts(categoryFilter)
+    }
+
     return (
         <div className="container-fluid">
-            <SearchBar searchProduct={searchProduct}/>
-            <Filter/>
+            <div className="d-flex justify-content-between mb-4">
+                <SearchBar searchProduct={searchProduct}/>
+                <Filter categoryFilter={categoryFilter}/>
+            </div>
             <CardLists filteredProducts={filteredProducts}/>
         </div>
     )
