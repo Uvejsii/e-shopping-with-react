@@ -5,6 +5,7 @@ const Filter = ({categoryFilter}) => {
     const [category, setCategory] = useState("Filter All")
 
     const onCategoryChange = (e) => {
+        e.preventDefault()
         const categoryToFilter = e.target.value
 
         setCategory(categoryToFilter)

@@ -1,3 +1,11 @@
+.search-and-filter-container {
+    padding-right: 110px;
+}
+
+.products-container {
+    margin: 100px 0 !important;
+}
+
 .card-title {
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -7,4 +15,14 @@
 
 .card-img-top, .card-title {
     cursor: pointer;
+}
+
+/*CART*/
+.cart-icon-container {
+    cursor: pointer;
+}
+
+.added-product-img {
+    width: 60px;
+    height: 70px;
 }
