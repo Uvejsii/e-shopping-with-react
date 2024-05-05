@@ -24,7 +24,7 @@ const ProductCard = ({product, addToCart}) => {
                         <p>Rating Count: {product.rating.count}</p>
                         <p>Rate: {product.rating.rate}</p>
                     </div>
-                    <button className="btn btn-primary w-100" onClick={onAddToCart(product)}>Add To Cart</button>
+                    <button className="btn btn-primary w-100" onClick={() => onAddToCart(product)}>Add To Cart</button>
                 </div>
             </div>
         </div>

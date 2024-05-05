@@ -6,7 +6,7 @@
     margin: 100px 0 !important;
 }
 
-.card-title {
+.card-title, .cart-item-title {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -18,6 +18,12 @@
 }
 
 /*CART*/
+.p-sidebar-header {
+    position: absolute;
+    left: 94%;
+    top: 7.4%;
+}
+
 .cart-icon-container {
     cursor: pointer;
 }
@@ -25,4 +31,9 @@
 .added-product-img {
     width: 60px;
     height: 70px;
+}
+
+.remove-btn {
+    padding: 2px !important;
+    font-size: 13px !important;
 }

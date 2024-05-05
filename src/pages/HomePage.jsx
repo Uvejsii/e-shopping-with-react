@@ -63,6 +63,34 @@ const HomePage = () => {
         console.log('Cart', addedItems)
     }
 
+    const increaseQuantity = (product) => {
+        const addedItems = [...cartItems]
+        const clickedItem = addedItems.findIndex(i => i.id === product.id)
+
+        if (clickedItem !== -1) {
+            addedItems[clickedItem].quantity++
+            setCartItems(addedItems)
+        }
+    }
+
+    const decreaseQuantity = (product) => {
+        const addedItems = [...cartItems]
+        const clickedItem = addedItems.findIndex(i => i.id === product.id)
+
+        if (clickedItem !== -1) {
+            if (addedItems[clickedItem].quantity === 1) return
+
+            addedItems[clickedItem].quantity--
+            setCartItems(addedItems)
+        }
+    }
+
+    const removeFromCart = (pId) => {
+        const addedItems = [...cartItems]
+        const updatedCart = addedItems.filter(item => item.id !== pId)
+        setCartItems(updatedCart)
+    }
+
     return (
         <>
             <nav className="navbar bg-primary fixed-top">
@@ -72,12 +100,14 @@ const HomePage = () => {
                         <SearchBar searchProduct={searchProduct}/>
                     </div>
                     <div className="position-absolute end-0 top-0 z-1 w-25">
-                        <Cart cartItems={cartItems}/>
+                        <Cart cartItems={cartItems} increaseQuantity={increaseQuantity}
+                              decreaseQuantity={decreaseQuantity} removeFromCart={removeFromCart}/>
                     </div>
                 </div>
             </nav>
             <div className="container-fluid products-container">
-                <CardLists filteredProducts={filteredProducts} addToCart={addToCart}/>
+                {filteredProducts.length > 0 ? <CardLists filteredProducts={filteredProducts} addToCart={addToCart}/>
+                    : <h1 className="text-center">LOADING...</h1>}
             </div>
         </>
     )
