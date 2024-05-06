@@ -39,7 +39,7 @@ const Cart = ({cartItems, increaseQuantity, decreaseQuantity, removeFromCart}) =
 
     return (
         <div className="cart-container">
-            <div className="cart-icon-container position-relative text-end mb-3"
+            <div className="cart-icon-container position-relative text-end"
                  onClick={() => setShowCartItems(!showCartItems)}>
                 <Cart2 className="fs-2 text-light"/>
                 <p className="text-light position-absolute top-0 start-100 translate-middle fw-bold">{totalQuantity}</p>
@@ -52,8 +52,9 @@ const Cart = ({cartItems, increaseQuantity, decreaseQuantity, removeFromCart}) =
                     </h4>
                     : cartItems.map((item) => (
                         showCartItems && (
-                            <div className="cart-items p-2 bg-primary-subtle d-flex gap-2 border border-dark-subtle"
-                                 key={item.id}>
+                            <div
+                                className="cart-items p-2 py-4 bg-primary-subtle d-flex gap-2 border border-dark-subtle"
+                                key={item.id}>
                                 <div className="cart-item-img h-25">
                                     <img src={item.image} alt="product image" className="added-product-img rounded-3"/>
                                 </div>

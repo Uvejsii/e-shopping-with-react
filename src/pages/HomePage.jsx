@@ -94,12 +94,12 @@ const HomePage = () => {
     return (
         <>
             <nav className="navbar bg-primary fixed-top">
-                <div className="container my-2 position-relative">
+                <div className="container my-2 position-relative d-flex justify-content-between">
                     <div className="search-and-filter-container d-flex justify-content-between w-75">
                         <Filter categoryFilter={categoryFilter}/>
                         <SearchBar searchProduct={searchProduct}/>
                     </div>
-                    <div className="position-absolute end-0 top-0 z-1 w-25">
+                    <div className="">
                         <Cart cartItems={cartItems} increaseQuantity={increaseQuantity}
                               decreaseQuantity={decreaseQuantity} removeFromCart={removeFromCart}/>
                     </div>
