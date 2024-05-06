@@ -13,7 +13,7 @@ const Filter = ({categoryFilter}) => {
     }
 
     return (
-        <select value={category} onChange={onCategoryChange}>
+        <select value={category} onChange={onCategoryChange} className="border-0 rounded fw-medium select-container">
             <option value="">Filter All</option>
             <option value="men's clothing">Mens Clothing</option>
             <option value="women's clothing">Womens Clothing</option>
