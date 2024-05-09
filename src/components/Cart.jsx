@@ -3,17 +3,19 @@ import {Cart2} from "react-bootstrap-icons";
 import "../index.css"
 import {useEffect, useState} from "react";
 import {Sidebar} from 'primereact/sidebar';
-import {ToastContainer, toast} from 'react-toastify';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Cart = ({cartItems, increaseQuantity, decreaseQuantity, removeFromCart}) => {
+const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart}) => {
     const [totalQuantity, setTotalQuantity] = useState(0)
     const [showCartItems, setShowCartItems] = useState(false)
 
+    const items = JSON.parse(localStorage.getItem('cartItems')) || []
+
     useEffect(() => {
-        const total = cartItems.reduce((acc, product) => acc + product.quantity, 0)
+        const total = items.reduce((acc, product) => acc + product.quantity, 0)
         setTotalQuantity(total)
-    }, [cartItems]);
+    }, [items]);
 
     const onIncreaseQuantity = (item) => {
         increaseQuantity(item)
@@ -46,11 +48,11 @@ const Cart = ({cartItems, increaseQuantity, decreaseQuantity, removeFromCart}) =
             </div>
             <Sidebar visible={showCartItems} position="right" onHide={() => setShowCartItems(false)}
                      className="cart-sidebar">
-                {cartItems.length < 1 ?
+                {items.length < 1 ?
                     <h4 className="bg-primary-subtle h-25 fw-bold d-flex justify-content-center align-items-center">
                         Your cart is empty
                     </h4>
-                    : cartItems.map((item) => (
+                    : items.map((item) => (
                         showCartItems && (
                             <div
                                 className="cart-items p-2 py-4 bg-primary-subtle d-flex gap-2 border border-dark-subtle"

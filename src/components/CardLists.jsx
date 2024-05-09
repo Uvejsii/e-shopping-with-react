@@ -31,16 +31,19 @@ const CardLists = ({filteredProducts, addToCart}) => {
             <div className="row row-cols-1 row-cols-xl-4 row-cols-md-3 row-cols-sm-2 g-4">
                 {filteredProducts.map((product) => (
                     <div className="col" key={product.id}>
-                        <div className="card h-100">
+                        <div className="card home-card h-100">
                             <img src={product.image} onClick={() => goToProduct(product.id)}
                                  className="card-img-top img-fluid"
                                  alt="..."/>
                             <div className="card-body">
                                 <h5 className="card-title" onClick={() => goToProduct(product.id)}>{product.title}</h5>
-                                <p>${product.price}</p>
-                                <div className="ratings d-flex justify-content-between">
-                                    <p>Rating Count: {product.rating.count}</p>
-                                    <p>Rate: {product.rating.rate}</p>
+                                <p className="fw-bold text-primary-emphasis">${product.price}</p>
+                                <div className="ratings d-flex justify-content-between text-primary-emphasis fw-medium">
+                                    <p>
+                                        Rating Count:
+                                        <span className="text-warning-emphasis"> {product.rating.count}</span>
+                                    </p>
+                                    <p>Rate: <span className="text-warning-emphasis">{product.rating.rate}</span></p>
                                 </div>
                                 <div>
                                     <button className="btn btn-primary w-100 fw-medium"

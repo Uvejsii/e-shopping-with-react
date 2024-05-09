@@ -25,6 +25,13 @@
     margin: 100px 0 !important;
 }
 
+.home-card:hover {
+    scale: 1.02;
+    box-shadow: 0 8px 9px 7px rgba(141, 141, 141, 0.22);
+    border-radius: 0 !important;
+    transition: all 0.3s;
+}
+
 .card-img-top {
     height: 250px !important;
     object-fit: contain;

@@ -10,7 +10,6 @@ const HomePage = () => {
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
     const [cartItems, setCartItems] = useState([])
-    // const [quantity, setQuantity] = useState(0)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -49,7 +48,8 @@ const HomePage = () => {
     }
 
     const addToCart = (product) => {
-        const addedItems = [...cartItems]
+        // const addedItems = [...cartItems]
+        const addedItems = JSON.parse(localStorage.getItem('cartItems')) || []
         const itemIndex = addedItems.findIndex(i => i.id === product.id)
 
         if (itemIndex !== -1) {
@@ -59,22 +59,26 @@ const HomePage = () => {
             addedItems.push(product)
         }
 
+        localStorage.setItem('cartItems', JSON.stringify(addedItems))
         setCartItems(addedItems)
         console.log('Cart', addedItems)
     }
 
     const increaseQuantity = (product) => {
-        const addedItems = [...cartItems]
+        // const addedItems = [...cartItems]
+        const addedItems = JSON.parse(localStorage.getItem('cartItems'))
         const clickedItem = addedItems.findIndex(i => i.id === product.id)
 
         if (clickedItem !== -1) {
             addedItems[clickedItem].quantity++
             setCartItems(addedItems)
+            localStorage.setItem('cartItems', JSON.stringify(addedItems))
         }
     }
 
     const decreaseQuantity = (product) => {
-        const addedItems = [...cartItems]
+        // const addedItems = [...cartItems]
+        const addedItems = JSON.parse(localStorage.getItem('cartItems'))
         const clickedItem = addedItems.findIndex(i => i.id === product.id)
 
         if (clickedItem !== -1) {
@@ -82,13 +86,16 @@ const HomePage = () => {
 
             addedItems[clickedItem].quantity--
             setCartItems(addedItems)
+            localStorage.setItem('cartItems', JSON.stringify(addedItems))
         }
     }
 
     const removeFromCart = (pId) => {
-        const addedItems = [...cartItems]
+        // const addedItems = [...cartItems]
+        const addedItems = JSON.parse(localStorage.getItem('cartItems'))
         const updatedCart = addedItems.filter(item => item.id !== pId)
         setCartItems(updatedCart)
+        localStorage.setItem('cartItems', JSON.stringify(updatedCart))
     }
 
     return (
@@ -100,7 +107,7 @@ const HomePage = () => {
                         <SearchBar searchProduct={searchProduct}/>
                     </div>
                     <div className="">
-                        <Cart cartItems={cartItems} increaseQuantity={increaseQuantity}
+                        <Cart increaseQuantity={increaseQuantity}
                               decreaseQuantity={decreaseQuantity} removeFromCart={removeFromCart}/>
                     </div>
                 </div>
