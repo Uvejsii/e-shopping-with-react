@@ -2,7 +2,7 @@
 import {useState} from "react";
 
 const Filter = ({categoryFilter}) => {
-    const [category, setCategory] = useState("Filter All")
+    const [category, setCategory] = useState("")
 
     const onCategoryChange = (e) => {
         e.preventDefault()
@@ -14,7 +14,7 @@ const Filter = ({categoryFilter}) => {
 
     return (
         <select value={category} onChange={onCategoryChange} className="border-0 rounded fw-medium select-container">
-            <option value="">Filter All</option>
+            <option value="filter all">Filter All</option>
             <option value="men's clothing">Mens Clothing</option>
             <option value="women's clothing">Womens Clothing</option>
             <option value="electronics">Electronics</option>

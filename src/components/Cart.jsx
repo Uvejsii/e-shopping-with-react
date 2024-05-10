@@ -9,13 +9,19 @@ import 'react-toastify/dist/ReactToastify.css';
 const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart}) => {
     const [totalQuantity, setTotalQuantity] = useState(0)
     const [showCartItems, setShowCartItems] = useState(false)
+    // const [totalBeforeTax, setTotalBeforeTax] = useState(0)
 
     const items = JSON.parse(localStorage.getItem('cartItems')) || []
 
     useEffect(() => {
-        const total = items.reduce((acc, product) => acc + product.quantity, 0)
-        setTotalQuantity(total)
+        const totalProductsQuantity = items.reduce((acc, product) => acc + product.quantity, 0)
+        setTotalQuantity(totalProductsQuantity)
     }, [items]);
+
+    // useEffect(() => {
+    //     const priceBeforeTax = items.reduce((acc, product) => acc + product.price, 0)
+    //     setTotalBeforeTax(priceBeforeTax)
+    // }, [totalQuantity]);
 
     const onIncreaseQuantity = (item) => {
         increaseQuantity(item)
@@ -58,12 +64,13 @@ const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart}) => {
                                 className="cart-items p-2 py-4 bg-primary-subtle d-flex gap-2 border border-dark-subtle"
                                 key={item.id}>
                                 <div className="cart-item-img h-25">
-                                    <img src={item.image} alt="product image" className="added-product-img rounded-3"/>
+                                    <img src={item.image} alt="product image"
+                                         className="added-product-img rounded-3"/>
                                 </div>
                                 <div className="cart-items-detail w-100">
                                     <p className="m-0 cart-item-title fw-semibold">{item.title}</p>
                                     <p className="m-0 fw-semibold">Price: <span
-                                        className="fw-bold">{item.price} $</span>
+                                        className="fw-bold">$ {item.price}</span>
                                     </p>
                                     <p className="m-0 fw-semibold">
                                         Quantity <span className="fw-bold">
@@ -84,7 +91,13 @@ const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart}) => {
                                 </div>
                             </div>
                         )
-                    ))}
+                    ))
+                }
+                {/*{items.length > 0 ?*/}
+                {/*    <div className="total-container bg-info">*/}
+                {/*        <p>Products ({totalQuantity}): $ {totalBeforeTax}</p>*/}
+                {/*    </div>*/}
+                {/*    : null}*/}
             </Sidebar>
         </div>
     )

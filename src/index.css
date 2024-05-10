@@ -48,6 +48,13 @@
     cursor: pointer;
 }
 
+.view-product:hover {
+    cursor: pointer;
+    opacity: 50% !important;
+    background-color: #dcdcdc;
+    transition: all 0.3s;
+}
+
 @media (max-width: 700px) {
     .search-and-filter-container {
         /*border: 1px solid peru;*/
@@ -107,7 +114,7 @@
     content: 'Close';
     position: absolute;
     right: 120%;
-    margin-bottom: 1px;
+    margin-bottom: 3px;
 }
 
 .cart-icon-container {

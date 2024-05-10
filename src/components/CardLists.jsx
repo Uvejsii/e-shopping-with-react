@@ -2,6 +2,7 @@
 import {useNavigate} from "react-router-dom";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useState} from "react";
 
 
 const CardLists = ({filteredProducts, addToCart}) => {
@@ -32,9 +33,17 @@ const CardLists = ({filteredProducts, addToCart}) => {
                 {filteredProducts.map((product) => (
                     <div className="col" key={product.id}>
                         <div className="card home-card h-100">
-                            <img src={product.image} onClick={() => goToProduct(product.id)}
-                                 className="card-img-top img-fluid"
-                                 alt="..."/>
+                            <div className="image-container position-relative">
+                                <img src={product.image} onClick={() => goToProduct(product.id)}
+                                     className="card-img-top img-fluid"
+                                     alt="..."/>
+                                <div
+                                    onClick={() => goToProduct(product.id)}
+                                    className="view-product position-absolute bottom-0 w-100 h-100 d-flex
+                                     justify-content-center align-items-center opacity-0">
+                                    <p className="m-0 fw-bold text-dark">View Product</p>
+                                </div>
+                            </div>
                             <div className="card-body">
                                 <h5 className="card-title" onClick={() => goToProduct(product.id)}>{product.title}</h5>
                                 <p className="fw-bold text-primary-emphasis">${product.price}</p>

@@ -40,15 +40,16 @@ const HomePage = () => {
     }
 
     const categoryFilter = (category) => {
+        console.log(products)
+        console.log(category)
         const categoryFilter = products.filter((product) => {
-            return product.category.includes(category)
+            return category === "filter all" ? products : product.category === category
         })
 
         setFilteredProducts(categoryFilter)
     }
 
     const addToCart = (product) => {
-        // const addedItems = [...cartItems]
         const addedItems = JSON.parse(localStorage.getItem('cartItems')) || []
         const itemIndex = addedItems.findIndex(i => i.id === product.id)
 
@@ -61,11 +62,9 @@ const HomePage = () => {
 
         localStorage.setItem('cartItems', JSON.stringify(addedItems))
         setCartItems(addedItems)
-        console.log('Cart', addedItems)
     }
 
     const increaseQuantity = (product) => {
-        // const addedItems = [...cartItems]
         const addedItems = JSON.parse(localStorage.getItem('cartItems'))
         const clickedItem = addedItems.findIndex(i => i.id === product.id)
 
@@ -77,7 +76,6 @@ const HomePage = () => {
     }
 
     const decreaseQuantity = (product) => {
-        // const addedItems = [...cartItems]
         const addedItems = JSON.parse(localStorage.getItem('cartItems'))
         const clickedItem = addedItems.findIndex(i => i.id === product.id)
 
@@ -91,7 +89,6 @@ const HomePage = () => {
     }
 
     const removeFromCart = (pId) => {
-        // const addedItems = [...cartItems]
         const addedItems = JSON.parse(localStorage.getItem('cartItems'))
         const updatedCart = addedItems.filter(item => item.id !== pId)
         setCartItems(updatedCart)
