@@ -40,8 +40,6 @@ const HomePage = () => {
     }
 
     const categoryFilter = (category) => {
-        console.log(products)
-        console.log(category)
         const categoryFilter = products.filter((product) => {
             return category === "filter all" ? products : product.category === category
         })
@@ -95,6 +93,10 @@ const HomePage = () => {
         localStorage.setItem('cartItems', JSON.stringify(updatedCart))
     }
 
+    const removeAllProducts = () => {
+        setCartItems(localStorage.removeItem('cartItems'))
+    }
+
     return (
         <>
             <nav className="navbar bg-primary fixed-top">
@@ -105,7 +107,10 @@ const HomePage = () => {
                     </div>
                     <div className="">
                         <Cart increaseQuantity={increaseQuantity}
-                              decreaseQuantity={decreaseQuantity} removeFromCart={removeFromCart}/>
+                              decreaseQuantity={decreaseQuantity}
+                              removeFromCart={removeFromCart}
+                              removeAllProducts={removeAllProducts}
+                        />
                     </div>
                 </div>
             </nav>

@@ -5,8 +5,9 @@ import {useEffect, useState} from "react";
 import {Sidebar} from 'primereact/sidebar';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import button from "bootstrap/js/src/button.js";
 
-const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart}) => {
+const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart, removeAllProducts}) => {
     const [totalQuantity, setTotalQuantity] = useState(0)
     const [showCartItems, setShowCartItems] = useState(false)
     const [tax, setTax] = useState(0)
@@ -44,6 +45,20 @@ const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart}) => {
         toast.success('Removed From Cart!', {
             position: "top-right",
             autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
+
+    const onRemoveAllProducts = () => {
+        removeAllProducts()
+        toast.info('All Products Removed From Cart!', {
+            position: "top-right",
+            autoClose: 1500,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -102,23 +117,31 @@ const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart}) => {
                     ))
                 }
                 {items.length > 0 ?
-                    <div className="total-container bg-primary rounded-bottom-3 fw-medium text-light p-2">
-                        <div className="d-flex align-items-center justify-content-between">
-                            <p className="m-0">Products
-                                (<span className="text-decoration-underline">{totalQuantity}</span>):
-                            </p>
-                            <p className="m-0">$ {totalBeforeTax}</p>
+                    <>
+                        <button className="btn btn-danger w-100 rounded-0 fw-medium shadow"
+                                onClick={onRemoveAllProducts}
+                        >
+                            Remove All Products
+                        </button>
+                        <div
+                            className="total-container bg-primary border border-secondary rounded-bottom-3 fw-medium text-light p-2 shadow">
+                            <div className="d-flex align-items-center justify-content-between">
+                                <p className="m-0">Products
+                                    (<span className="text-decoration-underline">{totalQuantity}</span>):
+                                </p>
+                                <p className="m-0">$ {totalBeforeTax}</p>
+                            </div>
+                            <div className="d-flex align-items-center justify-content-between my-2">
+                                <p className="m-0">TAX (5%):</p>
+                                <p className="m-0">$ {tax}</p>
+                            </div>
+                            <hr/>
+                            <div className="d-flex align-items-center justify-content-between">
+                                <h5 className="m-0">Order total:</h5>
+                                <h5 className="m-0">$ {totalAfterTax}</h5>
+                            </div>
                         </div>
-                        <div className="d-flex align-items-center justify-content-between my-2">
-                            <p className="m-0">TAX (5%):</p>
-                            <p className="m-0">$ {tax}</p>
-                        </div>
-                        <hr/>
-                        <div className="d-flex align-items-center justify-content-between">
-                            <h5 className="m-0">Order total:</h5>
-                            <h5 className="m-0">$ {totalAfterTax}</h5>
-                        </div>
-                    </div>
+                    </>
                     : null}
             </Sidebar>
         </div>
