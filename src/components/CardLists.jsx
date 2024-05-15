@@ -2,7 +2,6 @@
 import {useNavigate} from "react-router-dom";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {useState} from "react";
 
 
 const CardLists = ({filteredProducts, addToCart}) => {
@@ -46,7 +45,7 @@ const CardLists = ({filteredProducts, addToCart}) => {
                             </div>
                             <div className="card-body">
                                 <h5 className="card-title" onClick={() => goToProduct(product.id)}>{product.title}</h5>
-                                <p className="fw-bold text-primary-emphasis">${product.price}</p>
+                                <p className="fw-bold text-primary-emphasis">${(product.price).toFixed(2)}</p>
                                 <div className="ratings d-flex justify-content-between text-primary-emphasis fw-medium">
                                     <p>
                                         Rating Count:

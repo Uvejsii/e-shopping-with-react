@@ -57,7 +57,6 @@
 
 @media (max-width: 700px) {
     .search-and-filter-container {
-        /*border: 1px solid peru;*/
         padding: 0 !important;
         width: max-content !important;
         gap: 20px;
@@ -69,7 +68,6 @@
 
     .search-container {
         width: max-content !important;
-        /*border: 1px solid red;*/
     }
 
     .search-input {
@@ -106,15 +104,15 @@
 /*CART*/
 .p-sidebar-header {
     position: absolute;
-    left: 94%;
+    right: 94%;
     top: 1%;
 }
 
-.p-sidebar-header::before {
+.p-sidebar-header::after {
     content: 'Close';
     position: absolute;
-    right: 120%;
-    margin-bottom: 3px;
+    left: 120%;
+    margin-bottom: 2px;
 }
 
 .cart-icon-container {

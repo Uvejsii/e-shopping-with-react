@@ -9,7 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart}) => {
     const [totalQuantity, setTotalQuantity] = useState(0)
     const [showCartItems, setShowCartItems] = useState(false)
-    // const [totalBeforeTax, setTotalBeforeTax] = useState(0)
+    const [tax, setTax] = useState(0)
+    const [totalBeforeTax, setTotalBeforeTax] = useState(0)
+    const [totalAfterTax, setTotalAfterTax] = useState(0)
 
     const items = JSON.parse(localStorage.getItem('cartItems')) || []
 
@@ -18,10 +20,16 @@ const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart}) => {
         setTotalQuantity(totalProductsQuantity)
     }, [items]);
 
-    // useEffect(() => {
-    //     const priceBeforeTax = items.reduce((acc, product) => acc + product.price, 0)
-    //     setTotalBeforeTax(priceBeforeTax)
-    // }, [totalQuantity]);
+    useEffect(() => {
+        const priceBeforeTax = items.reduce((acc, product) => acc + (product.price * product.quantity), 0)
+        setTotalBeforeTax(priceBeforeTax.toFixed(2))
+
+        const taxResult = (priceBeforeTax * 0.05).toFixed(2)
+        setTax(taxResult)
+
+        const priceAfterTax = (parseFloat(priceBeforeTax) + parseFloat(taxResult)).toFixed(2)
+        setTotalAfterTax(priceAfterTax)
+    }, [totalQuantity]);
 
     const onIncreaseQuantity = (item) => {
         increaseQuantity(item)
@@ -70,7 +78,7 @@ const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart}) => {
                                 <div className="cart-items-detail w-100">
                                     <p className="m-0 cart-item-title fw-semibold">{item.title}</p>
                                     <p className="m-0 fw-semibold">Price: <span
-                                        className="fw-bold">$ {item.price}</span>
+                                        className="fw-bold">$ {(item.price).toFixed(2)}</span>
                                     </p>
                                     <p className="m-0 fw-semibold">
                                         Quantity <span className="fw-bold">
@@ -93,11 +101,25 @@ const Cart = ({increaseQuantity, decreaseQuantity, removeFromCart}) => {
                         )
                     ))
                 }
-                {/*{items.length > 0 ?*/}
-                {/*    <div className="total-container bg-info">*/}
-                {/*        <p>Products ({totalQuantity}): $ {totalBeforeTax}</p>*/}
-                {/*    </div>*/}
-                {/*    : null}*/}
+                {items.length > 0 ?
+                    <div className="total-container bg-primary rounded-bottom-3 fw-medium text-light p-2">
+                        <div className="d-flex align-items-center justify-content-between">
+                            <p className="m-0">Products
+                                (<span className="text-decoration-underline">{totalQuantity}</span>):
+                            </p>
+                            <p className="m-0">$ {totalBeforeTax}</p>
+                        </div>
+                        <div className="d-flex align-items-center justify-content-between my-2">
+                            <p className="m-0">TAX (5%):</p>
+                            <p className="m-0">$ {tax}</p>
+                        </div>
+                        <hr/>
+                        <div className="d-flex align-items-center justify-content-between">
+                            <h5 className="m-0">Order total:</h5>
+                            <h5 className="m-0">$ {totalAfterTax}</h5>
+                        </div>
+                    </div>
+                    : null}
             </Sidebar>
         </div>
     )
